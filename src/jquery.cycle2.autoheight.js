@@ -36,13 +36,13 @@ $(document).on( 'cycle-initialized', function( e, opts ) {
         // bind unique resize handler per slideshow (so it can be 'off-ed' in onDestroy)
         opts._autoHeightOnResize = function () {
             clearTimeout( resizeThrottle );
-            resizeThrottle = setTimeout( onResize, 50 );
+            resizeThrottle = setTimeout( onResize, 100 );
         };
 
         $(window).on( 'resize orientationchange', opts._autoHeightOnResize );
     }
 
-    setTimeout( onResize, 30 );
+    setTimeout( onResize, 100 );
 
     function onResize() {
         initAutoHeight( e, opts );
