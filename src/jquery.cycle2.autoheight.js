@@ -36,13 +36,15 @@ $(document).on( 'cycle-initialized', function( e, opts ) {
         // bind unique resize handler per slideshow (so it can be 'off-ed' in onDestroy)
         opts._autoHeightOnResize = function () {
             clearTimeout( resizeThrottle );
-            resizeThrottle = setTimeout( onResize, 100 );
+            resizeThrottle = setTimeout( onResize, 50 );
         };
 
         $(window).on( 'resize orientationchange', opts._autoHeightOnResize );
     }
 
-    setTimeout( onResize, 100 );
+    setTimeout( onResize, 30 );
+
+    opts.container.on( 'first-image-shown-cycle-on-ios', onResize );
 
     function onResize() {
         initAutoHeight( e, opts );
@@ -68,8 +70,8 @@ function initAutoHeight( e, opts ) {
         else
             sentinelIndex = autoHeight;
 
-        // only recreate sentinel if index is different
-        if ( sentinelIndex == opts._sentinelIndex )
+        // only recreate sentinel if index is different or container's height is 0
+        if ( sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0)
             return;
 
         opts._sentinelIndex = sentinelIndex;
