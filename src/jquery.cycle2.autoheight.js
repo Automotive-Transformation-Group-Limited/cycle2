@@ -51,7 +51,8 @@
   function initAutoHeight(e, opts) {
     var clone, height, sentinelIndex;
     var autoHeight = opts.autoHeight;
-
+    opts.heighIndex = opts.heighIndex ? opts.heighIndex : [];
+    opts.requiredRebuild = true;
     if (autoHeight == 'container') {
       height = $(opts.slides[opts.currSlide]).outerHeight();
       opts.container.height(height);
@@ -62,6 +63,10 @@
 
       // only recreate sentinel if index is different or container's height is 0
       if (sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0) return;
+
+      if (opts.autoHeightResizeOncePerSize && !opts.requiredRebuild) {
+        return;
+      }
 
       opts._sentinelIndex = sentinelIndex;
       if (opts._sentinel) opts._sentinel.remove();
@@ -92,6 +97,13 @@
         index = i;
       }
     });
+    if (opts.autoHeightResizeOncePerSize) {
+      if (max in opts.heighIndex) {
+        opts.requiredRebuild = false;
+        return opts.heighIndex[max];
+      }
+      opts.heighIndex[max] = index;
+    }
     return index;
   }
 

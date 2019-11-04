@@ -4,7 +4,8 @@
   "homepage": "https://github.com/GForces-PL/cycle2",
   "authors": [
     "malsup <malsup@gmail.com>",
-    "Damian Dziaduch <damian.dziaduch@gforces.pl>"
+    "Damian Dziaduch <damian.dziaduch@gforces.pl>",
+    "Rafał Międziocha <rafal.miedziocha@gforces.pl>"
   ],
   "description": "jQuery plugin for kickass slideshows - GForces edition",
   "main": "build/jquery.cycle2.js",
