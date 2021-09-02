@@ -22,7 +22,7 @@ grunt.initConfig({
     uglify: {
         core: {
             options: {
-                banner: '/* Plugin for Cycle2; Copyright (c) 2012-2016 M. Alsup, D. Dziaduch; v<%=pkg.version %> */\n'
+                banner: '/* Plugin for Cycle2; Copyright (c) 2012-2021 M. Alsup, D. Dziaduch; v<%=pkg.version %> */\n'
             },
             files: {
                 'build/core/jquery.cycle2.core.min.js': [ 'src/jquery.cycle2.core.js' ]
