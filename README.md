@@ -17,7 +17,7 @@ and then running grunt
 <pre>grunt</pre>
 
 ## Copyright and License
-Copyright &copy; 2012-2016 M. Alsup, D. Dziaduch
+Copyright &copy; 2012-2021 M. Alsup, D. Dziaduch
 
 The Cycle2 plugin is dual licensed under the [MIT](http://malsup.github.com/mit-license.txt) and [GPL](http://malsup.github.com/gpl-license-v2.txt) licenses.
 
