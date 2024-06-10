@@ -46,7 +46,7 @@ $.fn.cycle.transitions.carousel = {
             opts.carouselVisible = opts.slideCount - 1;
         var visCount = opts.carouselVisible || opts.slides.length;
         var slideCSS = { display: vert ? 'block' : 'inline-block', position: 'static' };
-
+        var carouselDirection = opts.carouselDirection || 'left';
         // required styles
         opts.container.css({ position: 'relative', overflow: 'hidden' });
         opts.slides.css( slideCSS );
@@ -55,7 +55,8 @@ $.fn.cycle.transitions.carousel = {
 
         // wrap slides in a div; this div is what is animated
         wrap = $('<div class="cycle-carousel-wrap"></div>')
-            .css({ margin: 0, padding: 0, top: 0, left: 0, position: 'absolute' });
+            .css({ margin: 0, padding: 0, top: 0, position: 'absolute' });
+        wrap.css({carouselDirection: 0});
 
         opts._carouselWrap = wrap;
 
@@ -161,6 +162,7 @@ $.fn.cycle.transitions.carousel = {
         var hops = opts.nextSlide - opts.currSlide;
         var vert = opts.carouselVertical;
         var speed = opts.speed;
+        var carouselDirection = opts.carouselDirection || 'left';
 
         // handle all the edge cases for wrapping & non-wrapping
         if ( opts.allowWrap === false ) {
@@ -201,7 +203,7 @@ $.fn.cycle.transitions.carousel = {
             }
         }
 
-        props[ vert ? 'top' : 'left' ] = fwd ? ( "-=" + moveBy ) : ( "+=" + moveBy );
+        props[ vert ? 'top' : carouselDirection ] = fwd ? ( "-=" + moveBy ) : ( "+=" + moveBy );
 
         // throttleSpeed means to scroll slides at a constant rate, rather than
         // a constant speed
