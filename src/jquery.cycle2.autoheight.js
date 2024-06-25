@@ -69,17 +69,16 @@
       } else {
         sentinelIndex = autoHeight;
       }
-      
-      if (opts._sentinel) {
-        // only recreate sentinel if index is different or container's height is 0
-        if (sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0) {
-          return;
-        }
 
-        if (opts.autoHeightResizeOncePerSize && !opts.requiredRebuild) {
-          return;
-        }
+      // only recreate sentinel if index is different or container's height is 0
+      if (sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0) {
+        return;
       }
+
+      if (opts.autoHeightResizeOncePerSize && !opts.requiredRebuild) {
+        return;
+      }
+
 
       opts._sentinelIndex = sentinelIndex;
       if (opts._sentinel) opts._sentinel.remove();
