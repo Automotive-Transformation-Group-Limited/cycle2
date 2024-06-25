@@ -60,9 +60,6 @@
       opts.container.height(opts.container.width() / opts._autoHeightRatio);
     } else if (autoHeight === 'calc' || ($.type(autoHeight) == 'number' && autoHeight >= 0)) {
       if (autoHeight === 'calc') {
-        if (opts._sentinel) {
-          opts._sentinel.remove();
-        }
         sentinelIndex = calcSentinelIndex(e, opts);
       } else if (autoHeight >= opts.slides.length) {
         sentinelIndex = 0;
