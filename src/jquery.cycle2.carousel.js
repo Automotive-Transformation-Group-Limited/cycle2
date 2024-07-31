@@ -125,7 +125,7 @@ $.fn.cycle.transitions.carousel = {
             }
         }
 
-        opts._carouselWrap.css( vert ? 'top' : 'left', offset );
+        opts._carouselWrap.css( vert ? 'top' : (opts.carouselDirection || 'left'), offset );
     },
 
     fluidSlides: function( opts ) {
