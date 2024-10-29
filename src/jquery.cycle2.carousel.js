@@ -48,7 +48,7 @@ $.fn.cycle.transitions.carousel = {
         var slideCSS = { display: vert ? 'block' : 'inline-block', position: 'static' };
         var carouselDirection = opts.carouselDirection || 'left';
         // required styles
-        opts.container.css({ position: 'relative', overflow: 'hidden' });
+        opts.container.css({ position: 'relative', overflow: 'hidden', direction: this.isRightCarouselDirection(opts) ? 'rtl' : 'ltr' });
         opts.slides.css( slideCSS );
 
         opts._currSlide = opts.currSlide;
@@ -232,14 +232,29 @@ $.fn.cycle.transitions.carousel = {
         return moveBy;
     },
 
-    genCallback: function( opts, fwd, vert, callback ) {
+    genCallback: function(opts, fwd, vert, callback) {
         // returns callback fn that resets the left/top wrap position to the "real" slides
-        return function() {
-            var pos = $(opts.slides[opts.nextSlide]).position();
-            var offset = 0 - pos[vert?'top':'left'] + (opts.carouselOffset || 0);
-            opts._carouselWrap.css( opts.carouselVertical ? 'top' : 'left', offset );
+        return (function () {
+            var index = opts.nextSlide;
+            var pos;
+            var offset;
+            var numberOfAppendSlides;
+
+            pos = $(opts.slides[index]).position();
+            offset = 0 - pos[vert ? 'top' : 'left'] + (opts.carouselOffset || 0);
+
+            if (this.isRightCarouselDirection(opts)) {
+                numberOfAppendSlides = opts.carouselVisible === undefined ? opts.slideCount * 2 : opts.slideCount;
+                numberOfAppendSlides = !fwd ? numberOfAppendSlides - 1 : numberOfAppendSlides;
+                offset = -1 * (numberOfAppendSlides * this.getSlideWidth(opts.slides[opts.nextSlide]));
+            }
+            opts._carouselWrap.css(opts.carouselVertical ? 'top' : opts.carouselDirection, offset);
             callback();
-        };
+        }).bind(this);
+    },
+
+    isRightCarouselDirection: function(opts) {
+        return 'right' === opts.carouselDirection || false;
     },
 
     // core API override
