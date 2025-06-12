@@ -60,26 +60,22 @@
       opts.container.height(opts.container.width() / opts._autoHeightRatio);
     } else if (autoHeight === 'calc' || ($.type(autoHeight) == 'number' && autoHeight >= 0)) {
       if (autoHeight === 'calc') {
-        if (opts._sentinel) {
-          opts._sentinel.remove();
-        }
         sentinelIndex = calcSentinelIndex(e, opts);
       } else if (autoHeight >= opts.slides.length) {
         sentinelIndex = 0;
       } else {
         sentinelIndex = autoHeight;
       }
-      
-      if (opts._sentinel) {
-        // only recreate sentinel if index is different or container's height is 0
-        if (sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0) {
-          return;
-        }
 
-        if (opts.autoHeightResizeOncePerSize && !opts.requiredRebuild) {
-          return;
-        }
+      // only recreate sentinel if index is different or container's height is 0
+      if (sentinelIndex == opts._sentinelIndex && opts.container.height() !== 0) {
+        return;
       }
+
+      if (opts.autoHeightResizeOncePerSize && !opts.requiredRebuild) {
+        return;
+      }
+
 
       opts._sentinelIndex = sentinelIndex;
       if (opts._sentinel) opts._sentinel.remove();
